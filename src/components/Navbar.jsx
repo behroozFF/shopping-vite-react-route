@@ -1,13 +1,14 @@
 import { useState } from 'react'
+// از یوز ستیت استفاده کردم برای کنترل مودال
 
 import { Navbar as NavbarBS, Button, Modal } from 'react-bootstrap'
 import { BsCart } from 'react-icons/bs'
 
 
 function Navbar(){
-    // false مقدار پیش فرض مودال من بسته باشه
-    // ما می خواهیم وقتی مودال کلیک میشه تبدیل به ترو
-   const [showModal, setShowModel] = useState(false)
+     // false مقدار پیش فرض مودال من بسته باشه
+     // ما می خواهیم وقتی مودال کلیک میشه تبدیل به ترو
+     const [showModal, setShowModel] = useState(false)
 
      const handleShow = () => {setShowModel(true)}
      const handleClose = () => {setShowModel(false)}

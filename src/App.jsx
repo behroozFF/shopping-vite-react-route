@@ -11,6 +11,7 @@ function App() {
     <Container>
        <Navbar></Navbar> 
       <Routes>
+          {/* index */}
         <Route path='/' element={<Shop />}/>
       </Routes>
     </Container>

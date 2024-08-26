@@ -1,9 +1,8 @@
 import {createContext} from 'react'
-// add  new something
 // می خواهیم لیست محصولاتم به شکل آرایه که توی سبد خرید قرار می گیر جزو کانتکس ما باشند
 
 // export const CardContext  تابتونیم در فایل های دیگه هم از شون استفاده کنیم
-export const CartContext = createContext({
+export const CartContext =  ({  
     // مقدار اولیه رو خالی نگه میدارم [] 
     items: [],
     // از طریق این تابع می خواهیم بفهمیم تعداد محصول چند تا هست
@@ -28,7 +27,7 @@ export const CartContext = createContext({
 // بخاطر اینکه ما می خواهیم جلوتر بگیم که هر چیزی که نستت این بود بتونه از کانتکس ما استفاده نه
 // با استفاده از مقدار ولیو
 // children کانپوننت زیر مجموعه هست
- function CartProvider({ children }) {
+ export function CartProvider({ children }) {
     const ContextValue = {
         
          /* اینجا همون جای که بالا در کارت کانتکس به عنوان مقدار اولیه گفتیم */
