@@ -40,15 +40,13 @@ function ProductItem({ product }){
              {/* میام از شرط استفاده می کنم */}
              {/* در صورتی که بیشتر از صفر بود  */}
              {/* یک فرگمنت میسازم که بتونم دو تا دکمه درست کنم زیاد و کم کنه */}
-             {productQuantity > 0 ? (
+             
 
-              <><div className='text-white'>test</div></>
-
-             ): ( // : در غیر این صورت دکمه افزودن به سبد خرید اضافه کن
+    
               <Button onClick={() => cart.addItemToCard(product.id) } variant='btn btn-outline-secondary' className='text-white'>
               افزودن به سبد خرید
                 </Button>
-             )}
+        
 
         </Card.Body>
     </Card>
