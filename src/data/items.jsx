@@ -28,7 +28,7 @@ const productList = [
 ]
 
 function GetProductData(id) {
-                                 
+
     let productData = productList.find((item) => item.id === id)
 
     return GetProductData 

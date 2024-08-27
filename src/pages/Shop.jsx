@@ -9,7 +9,6 @@ function Shop() {
         <Row xs={1} md={4} className='g-4'>
            {productList.map((item) => (
             <Col align='center' key={item.id}>
-                            {/* prop */}  
                 <ProductItem product={item} />
             </Col>
            ))}

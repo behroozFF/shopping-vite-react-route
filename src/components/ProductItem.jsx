@@ -2,7 +2,7 @@
 //بتونیم هر محصول اضافه کنیم به سبد خرید
 // و در صفحه فراخوانی میکنم pages/Shop.jsx
 import { Card, Button } from 'react-bootstrap'
-import profilePic from '../../public/images/speaker.jpg'
+/* import profilePic from '../../public/images/speaker.jpg' */
                     //prop
 function ProductItem({ product }){
   return(

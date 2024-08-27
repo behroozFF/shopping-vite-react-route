@@ -1,20 +1,19 @@
-import { Routes, Route  } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 
-import Navbar from "./components/Navbar.jsx"
-import Shop from './pages/Shop.jsx'
+import Navbar from './components/Navbar'
+import Shop from './pages/Shop'
 
 
 function App() {
-
-  return(
-    <Container>
-       <Navbar></Navbar> 
-      <Routes>
-          {/* index */}
-        <Route path='/' element={<Shop />}/>
-      </Routes>
-    </Container>
+  return (
+  
+      <Container>
+        <Navbar></Navbar>
+        <Routes>
+          <Route path='/' element={<Shop />} />
+        </Routes>
+      </Container>
   )
 }
 
