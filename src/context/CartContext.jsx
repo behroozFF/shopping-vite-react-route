@@ -1,5 +1,7 @@
 import {createContext, useState} from 'react'
-// add  new something
+import { GetProductData } from '../data/items'
+// '../data/items' نیاز داریم برای نمایش قیمت کل محصولات
+
 // می خواهیم لیست محصولاتم به شکل آرایه که توی سبد خرید قرار می گیر جزو کانتکس ما باشند
 
 // export const CardContext  تابتونیم در فایل های دیگه هم از شون استفاده کنیم
@@ -14,7 +16,7 @@ export const CartContext = createContext({
     // این تابع میاد یک مقدار حذف میکنه
     removeItemFromCard: () => {},
     
-    // این تابع حذف داشته باشم اما به شکل دیگه ای
+    // تابع حذف کلی محصولات از سبد خرید
     deleteFromCard: () => {},
 
     // تابعی که کل مبلغ توی سبد خرید داریم بتونم محاسبه کنم
@@ -25,7 +27,7 @@ export const CartContext = createContext({
 // به کمک تابع کارت پرووایدر
 // می تونیم تعیین کنیم کانتکسی که داریم ازش استفاده میکنیم شامل کدوم کمپوننت ها میتون باشه
 // پس آرگومانش مقدار چیلدرن باشه
-// بخاطر اینکه ما می خواهیم جلوتر بگیم که هر چیزی که نستت این بود بتونه از کانتکس ما استفاده نه
+// بخاطر اینکه ما می خواهیم جلوتر بگیم که هر چیزی که نستت این بود بتونه از کانتکس ما استفاده کنه
 // با استفاده از مقدار ولیو
 // children کانپوننت زیر مجموعه هست
  export function CartProvider({ children }) {
@@ -55,25 +57,29 @@ export const CartContext = createContext({
      const quantity = getProductQuantity(id)
      if(quantity === 0){
         //... spread operator
-        //این به این معنی که استیت قبلی که دارم هموم مقدار بمون و تغییری نکنه
-        // چون تغییر استیت توی ریکت میتونه تاثیر بزار توی رندر شد برنامه مون و این برای پرفرمنس خوب نیست
+        //این به این معنی که استیت قبلی که دارم همون مقدار بمون و تغییری نکنه
+        // چون تغییر استیت توی ریکت میتونه تاثیر بزار توی رندر شدن برنامه مون و این برای پرفرمنس خوب نیست
         // پس من با این دستور دارم میگم هر مقداری که از قبل داریم رو بزار سرجاش بمونه
         // ولی بهش یک آبجکت جدید بهش اضافه کن
         // ,{id: id}
         // آبجکت جدید همین محصولی  که می خوام اضافه بشه قطعا یک آیدی دار برابر ایدی
+        // تلاش مون اینکه استیت قبلی که داریم دست نخورده بمون 
+        // هر مقداری که از قبل داریم بزار سر جاش بمون
+        // quantity === 0 یعنی توی شرط تعداد صفر هست پس یکی بهش اضافه کن
         setCartProducts([...cartProducts, {id: id, quantity: 1}])
                     //State cartProducts
 
         }else{
             setCartProducts(
-                // ?  علامت سوال  یعنی اینکه اگر وجود داشت یکی اضافه کن به محصول
-                // : یعنی در غیر اینصورت
+                // ?  علامت سوال  یعنی اینکه اگر وجود داشت یکی اضافه کن به تعداد محصول
+                // : item  یعنی در غیراین صورت همون آیتم نمایش بده
             cartProducts.map((item) => item.id === id ? {...item,
                 quantity: item.quantity + 1} : item)
-            )
-        }                  
-   }
 
+            )
+            } 
+   }
+  
    //_______________________________________________________
    // فانکشن پاک کردن محصول
    // پاک کردن یک محصول خاص از سبد خرید
@@ -82,24 +88,48 @@ export const CartContext = createContext({
     setCartProducts((cartProducts) => 
         cartProducts.filter((item) => {
             return item.id != id
+            //  هر جا آیتم ایدی برابر نبود با آیدی آرگمان 
         }))
    }
 
 
    //________________________________________________
-   //
+   // تابع پاک کردن یک واحد محصول مشخص از سبد خرید
    // میاد یک واحد از اون محصول خاص رو کم میکنه
    function removeItemFromCart(id) {
     const quantity = getProductQuantity(id)
 
     if(quantity === 1){
-        deleteFromCart
+        deleteFromCart(id)
+    } else {
+        setCartProducts(
+            cartProducts.map((item) => item.id === id ? {...item,
+                quantity: item.quantity - 1 } :
+                 item
+      )
+     )
     }
-   }
+  }
 
+
+  //________________________________________
+  // تابع پیمایش تعداد کل محصولات و ارزش محصولات از استیت محصولات
+  function getTotalAmount() {
+    let totalAmount = 0
+   
+    cartProducts.map((item) => {
+        const productData = GetProductData(item.id)
+        
+        // فیمت کل یک محصول براساس تعداد محصول
+        totalAmount += productData.price * item.quantity
+        
+    }) 
+  }
+
+  // فرایند توسعه دادن ولیو های کانتکس برای ما تکمیل شد
     const ContextValue = {
         
-         /* اینجا همون جای که بالا در کارت کانتکس به عنوان مقدار اولیه گفتیم */
+         /* cartContextاینجا همون جای که بالا در کارت کانتکس به عنوان مقدار اولیه گفتیم */
          // [] مقدار اولیه آرایه خالی
          items: cartProducts,
          getProductQuantity,
