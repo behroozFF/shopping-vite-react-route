@@ -5,7 +5,7 @@ const productList = [
         id: '1',
         title: 'Product',
         price: 99,
-        image: '/images/product.jpg'
+        image: '/images/airpods.jpg'
     },
     {
         id: '2',
