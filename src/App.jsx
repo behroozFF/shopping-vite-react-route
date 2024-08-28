@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 
 
 import Navbar from './components/Navbar'
-import Shop from './pages/Shop'
+import Shop from './pages/Shop.jsx'
 
 
 function App() {
