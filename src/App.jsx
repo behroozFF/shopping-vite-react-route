@@ -14,7 +14,7 @@ function App() {
       <Container>
         <Navbar></Navbar>
         <Routes>
-          <Route path='/' element={<Shop />} />
+          <Route index element={<Shop />} />
         </Routes>
       </Container>
    
