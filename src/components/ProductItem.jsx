@@ -1,7 +1,7 @@
 // یک کمپوننت برای محصول میسازم  
 //بتونیم هر محصول اضافه کنیم به سبد خرید
 // و در صفحه فراخوانی میکنم pages/Shop.jsx
-import { useContext } from 'react'
+
 //import { useContext }  تا بتونیم از کانتکسی که ساختیم استفاده کنیم
 import { Card, Button } from 'react-bootstrap'
 /* import profilePic from '../../public/images/speaker.jpg' */
